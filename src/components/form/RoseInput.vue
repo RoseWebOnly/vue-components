@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    inheritAttrs: false,
     props: {
         value: {
             type: String,
@@ -13,7 +14,8 @@ export default {
         }
     },
     methods: {
-        onInput() {
+        onInput(e) {
+            this.$emit('input', e.target.value);
             this.$parent.$emit('validate');
         }
     }

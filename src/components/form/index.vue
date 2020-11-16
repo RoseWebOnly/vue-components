@@ -3,8 +3,8 @@
         <h1>rose表单插件</h1>
         <hr>
         <rose-form :model="model" :rules="rules" ref="loginForm">
-            <rose-form-item label='用户名' prop="userName">
-                <rose-input v-model="model.userName"></rose-input>
+            <rose-form-item label='用户名' prop="username">
+                <rose-input v-model="model.username"></rose-input>
             </rose-form-item>
             <rose-form-item label='密码' prop="password">
                 <rose-input type="password" v-model="model.password"></rose-input>
@@ -21,6 +21,8 @@
 import RoseInput from './RoseInput'
 import RoseFormItem from './RoseFormItem'
 import RoseForm from './RoseForm.vue'
+import create from '@/utils/create'
+import Notice from '@/components/dialog/Notice'
 
 
 export default {
@@ -32,11 +34,11 @@ export default {
     data() {
         return {
             model: {
-                userName: '',
+                username: '',
                 password: '',
             },
             rules: {
-                userName: {required: true, message: '请输入用户名'},
+                username: {required: true, message: '请输入用户名'},
                 password: {required: true, message:'请输入密码'}
             }
         }
@@ -45,9 +47,14 @@ export default {
         submitForm() {
             this.$refs['loginForm'].validate(valid => {
                 if (valid) {
-                    alert('提交成功');
+                    const notice = create(Notice, {
+                        title: '成功了',
+                        message: '我觉得没成功',
+                        duration: 2000
+                    });
+                    notice.show();
                 } else {
-                    alert('失败');
+                    //alert('失败');
                 }
             })
         }
