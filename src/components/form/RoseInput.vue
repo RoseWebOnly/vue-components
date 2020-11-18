@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import emitter from '@/mixins/emitter'
+
 export default {
     inheritAttrs: false,
+    mixins: [emitter],
     props: {
         value: {
             type: String,
@@ -16,7 +19,7 @@ export default {
     methods: {
         onInput(e) {
             this.$emit('input', e.target.value);
-            this.$parent.$emit('validate');
+            this.dispatch('formItem', 'validate');
         }
     }
 }

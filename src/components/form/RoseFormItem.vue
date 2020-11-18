@@ -8,9 +8,12 @@
 
 <script>
 import Schema from 'async-validator'
+import emitter from '@/mixins/emitter'
 
 export default {
     inject: ['form'],
+    mixins: [emitter],
+    componentName: 'formItem',
     props: {   
         label: {
             type: String,
@@ -50,7 +53,10 @@ export default {
     mounted() {
         this.$on('validate', () => {
             this.validate();
-        })
+        });
+        if (this.prop) {
+            this.dispatch('roseForm', 'addFields', this);
+        }
     }
 
 }

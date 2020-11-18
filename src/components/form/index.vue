@@ -50,7 +50,7 @@ export default {
                     const notice = create(Notice, {
                         title: '成功了',
                         message: '我觉得没成功',
-                        duration: 2000
+                        duration: 5000
                     });
                     notice.show();
                 } else {
